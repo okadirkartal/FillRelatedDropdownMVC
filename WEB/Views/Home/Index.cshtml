@@ -1,0 +1,64 @@
+﻿@model ViewModel.LocationViewModel
+ <script type="text/javascript" src="/assets/js/jquery-1.8.2.min.js"></script>
+@using System.Web.Mvc 
+<script>
+    $(function () {
+            $('#Country').on('change', function () {
+                var stateDropdown = $('#City');
+                //disable state drop down
+                stateDropdown.prop('disabled', 'disabled');
+                //clear drop down of old states
+                stateDropdown.empty();
+
+                //retrieve selected country
+                var country = $(this).val();
+                if (country.length > 0) {
+                    // retrieve data using a Url.Action() to construct url
+                    $.getJSON('/Home/GetCities', {
+                        CountryId: country
+                    })
+                    .done(function (data) {
+                        //re-enable state drop down
+                        stateDropdown.removeProp('disabled');
+                        //for each returned state
+                        $.each(data, function (i, state) {
+                            //Create new option
+                            //append state states drop down
+                            stateDropdown.append($('<option></option>').val(state.Id).html(state.Name));
+                        });
+                    })
+                    .fail(function (jqxhr, textStatus, error) {
+                        var err = textStatus + ", " + error;
+                        console.log("Request Failed: " + err);
+                    });
+                }
+            }); 
+    });
+</script>
+
+
+<div class="head_line profil">
+    <h1>ZDRASTVUY )</h1><br />
+</div>
+
+<div class="profil">
+    <div class="h2_box">
+        <h2>Fill Dropdown in MVC-QUERY</h2><br />
+    </div>
+    <div class="row">
+        @{
+                   <div class="clear"></div>
+
+                    <div class="clear"></div>
+                        
+                       
+                            @Html.LabelFor(m => m.Country, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.Country, new SelectList(Model.Countries, "ID", "Name"), "--- Seçiniz ---", new { @class = "form-control" })
+                      
+                      
+                            @Html.LabelFor(m => m.City, new { @class = "control-label" })
+                            @Html.DropDownListFor(m => m.City, new SelectList(Model.Cities, "ID", "Name"), "--- Seçiniz ---", new { @class = "form-control" })
+        
+        }
+    </div>
+</div>
