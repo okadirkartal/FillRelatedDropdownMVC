@@ -13,7 +13,7 @@ namespace Business.Impl
             {
                 case 1:
                     {
-                        cityList.Add(new City() { Id=1,CountryId=countryId,Name="İstanbul"});
+                        cityList.Add(new City() { Id = 1, CountryId=countryId,Name="İstanbul"});
                         cityList.Add(new City() { Id = 2, CountryId = countryId, Name = "Ankara" });
                         cityList.Add(new City() { Id = 3, CountryId = countryId, Name = "İzmir" });
                         break;

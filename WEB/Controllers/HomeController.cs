@@ -13,7 +13,7 @@ namespace WEB.Controllers
         // GET: /Ajax/
         public ActionResult Index()
         {
-            LocationViewModel viewModel = new LocationViewModel();
+            var viewModel = new LocationViewModel();
             viewModel.Countries = new List<Country>() {
                 new Country() { Id=1,Name="Turkey"},
                 new Country() { Id=2,Name="Russia"},
